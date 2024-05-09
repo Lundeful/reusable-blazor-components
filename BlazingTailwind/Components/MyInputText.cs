@@ -1,3 +1,4 @@
+using BlazingTailwind.Utils;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -10,17 +11,7 @@ public class MyInputText : InputText
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var attributes = AdditionalAttributes?.ToDictionary() ?? new Dictionary<string, object>();
-        if (attributes.TryGetValue("class", out var existingClass))
-        {
-            attributes["class"] = $"{BaseClass} {existingClass}";
-        }
-        else
-        {
-            attributes.Add("class", BaseClass);
-        }
-
-        AdditionalAttributes = attributes;
+        AdditionalAttributes = ComponentStyleHelper.ApplyBaseClass(BaseClass, AdditionalAttributes);
         base.BuildRenderTree(builder);
     }
 }
