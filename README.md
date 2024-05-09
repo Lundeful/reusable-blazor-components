@@ -62,3 +62,10 @@ export const CustomInput: FC<InputHTMLAttributes<HTMLInputElement>> = (className
     return <input className={combinedClasses} {...props} />;
 };
 ```
+
+## How to run
+
+1. Clone the solution
+2. Open the BlazingTailwind.sln in Rider, Visual Studio or your editor of choice
+3. From a Terminal in the `BlazingTailwind` folder run `npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/app.min.css --watch` to continously update the tailwind styles
+4. Run the BlazingTailwind project
