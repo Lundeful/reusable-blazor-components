@@ -1,6 +1,6 @@
 # Reusable Blazor Components
 
-I made this project to test out how create reusable Blazor components in a way that give you the same experience as using the underlying component with full support for intellisense.
+I made this project to test out how create reusable Blazor components in a way that give you the same experience as using the underlying component with full support for intellisense. It's based on the standard stand-alone WASM template.
 
 For simple html attributes then you can use [attribute splatting](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/splat-attributes-and-arbitrary-parameters?view=aspnetcore-8.0). Unfortunately this does not work on directives like `@bind-value`. If you manually take care of all the directives then you can splat the rest, but I didn't want to do that just to perhaps style something (simpler scenarios).
 
