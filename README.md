@@ -2,9 +2,9 @@
 
 I made this project to test out how create reusable Blazor components in a way that give you the same experience as using the underlying component with full support for intellisense.
 
-For simple html attributes then you can use [attribute splatting](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/splat-attributes-and-arbitrary-parameters?view=aspnetcore-8.0). Unfortunately this does not work on directives like `@bind-value`. 
+For simple html attributes then you can use [attribute splatting](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/splat-attributes-and-arbitrary-parameters?view=aspnetcore-8.0). Unfortunately this does not work on directives like `@bind-value`. If you manually take care of all the directives then you can splat the rest, but I didn't want to do that just to perhaps style something (simpler scenarios).
 
-As a test-case I used the `InputText` component and used something simple like styling. This way I can easily verify that passing `@bind-value` works and I can override the styles from the caller.
+As a test-case I used the `InputText` component and used something simple like styling. This way I can easily verify that passing `@bind-value` works and I can override the attribute from the caller.
 
 ## The current working solution
 1. Inherit the component you wish to wrap
