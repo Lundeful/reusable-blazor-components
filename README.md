@@ -10,30 +10,44 @@ As a test-case I used the `InputText` component and used something simple like s
 1. Inherit the component you wish to wrap
 2. Override `BuildRenderTree` and modify the class attribute.
 
-This was the first version that seems to work fine. There might be issues or limits with this that I haven't seen yet. There might be other ways of doing it as well that I haven't discovered. If you go this route I would definitely extract this to a utility class or an extension method.
+This was the first version that seems to work fine. There might be issues or limits with this that I haven't seen yet. There might be other ways of doing it as well that I haven't discovered.
 
+### Usage
 ```C#
-public class MyCustomComponent : OriginalComponent
+public class MyInputText : InputText
 {
-    private const string BaseClass = "your-classes-here";
+    private const string BaseClass = "my-base-classes";
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        var attributes = AdditionalAttributes?.ToDictionary() ?? new Dictionary<string, object>();
-        if (attributes.TryGetValue("class", out var existingClass))
-        {
-            attributes["class"] = $"{BaseClass} {existingClass}";
-        }
-        else
-        {
-            attributes.Add("class", BaseClass);
-        }
-
-        AdditionalAttributes = attributes;
+        AdditionalAttributes = ComponentStyleHelper.ApplyBaseClass(BaseClass, AdditionalAttributes);
         base.BuildRenderTree(builder);
     }
 }
 ```
+
+This allows to create easily styled components that act like the original component and also use directives with few lines of code. This is made simple by creating this utility function that you can reuse.
+
+```C#
+public static class ComponentStyleHelper
+{
+    public static Dictionary<string, object> ApplyBaseClass(string baseClass, IReadOnlyDictionary<string, object>? originalAttributes)
+    {
+        var attributes = new Dictionary<string, object>(originalAttributes ?? new Dictionary<string, object>());
+        if (attributes.TryGetValue("class", out var existingClass))
+        {
+            attributes["class"] = $"{baseClass} {existingClass}";
+        }
+        else
+        {
+            attributes.Add("class", baseClass);
+        }
+
+        return attributes;
+    }
+}
+```
+
 
 ## React equivalent
 If you are familiar with React, this is basically what I'm trying to achieve but in Blazor and C#.
